@@ -6,10 +6,10 @@ if ($_SESSION["loggedin"] != true) {
 }
 
 include 'connect_database.php';
-$id = $_GET['id'];
+$id = $database_connection->real_escape_string($_GET['id']);
 
 // Connectie maken met de database ....
-$result = database("SELECT * FROM data WHERE station_id =".$id." ORDER BY date DESC ");
+$result = $database_connection->query("SELECT * FROM data WHERE station_id =".$id." ORDER BY date DESC ");
 $answer = array();
 
 

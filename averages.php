@@ -15,6 +15,7 @@ if(!isset($_GET['start-time']) || !isset($_GET['end-time'])) {
 $startTime = $_GET['start-time'];
 $endTime = $_GET['end-time'];
 
+// $startTime and $endTime are definitely an int, so they are safe to be used in sql queries
 if(is_numeric($startTime)) $startTime = intval($startTime);
 else $startTime = strtotime($startTime);
 
@@ -88,6 +89,7 @@ include 'connect_database.php';
         </thead>
         <tbody>
         <?php
+        // $startTime and $endTime are definitely an int, so they are safe to be used in sql queries
         $query = "
 SELECT stn, country, name, latitude, longitude, elevation, `AVG(temperature)`, `AVG(dew_point)`, `AVG(station_air_pressure)`, `AVG(sea_air_pressure)`, `AVG(visibility)`, `AVG(wind_speed)`, `AVG(precipitation)`, `AVG(snow_height)`, `AVG(overcast)`
 FROM (
@@ -106,7 +108,7 @@ FROM (
 JOIN stations
 ON averages.station_id = stations.stn";
 
-        $result = database($query);
+        $result = $database_connection->query($query);
         foreach($result as $row) {
             echo '<tr>';
 

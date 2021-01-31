@@ -12,7 +12,12 @@ $benchmark_start = round(microtime(1) * 1000);
 include 'connect_database.php';
 
 $exportType = $_POST['export-type'];
-$exportData = explode(',', $_POST['export-data']);
+
+$exportDataUnescaped = explode(',', $_POST['export-data']);
+$exportData = [];
+foreach($exportDataUnescaped as $entry) {
+    array_push($exportData, '`' . $database_connection->real_escape_string($entry) . '`');
+}
 
 if($_POST['selected-stations'] === '') {
     die(json_encode([
@@ -24,12 +29,18 @@ if($_POST['selected-stations'] === '') {
 if($_POST['selected-stations'] === 'all') {
     $stationsQuery = 'true';
 }else{
-    $selectedStations = explode(',', $_POST['selected-stations']);
+    $selectedStationsUnescaped = explode(',', $_POST['selected-stations']);
+    $selectedStations = [];
+    foreach($selectedStationsUnescaped as $entry) {
+        array_push($selectedStations, "'" . $database_connection->real_escape_string($entry) . "'");
+    }
+
     $stationsQuery = 'station_id=' . implode(' OR station_id=', $selectedStations);
 }
 
 $maxRows = intval($_POST['max-rows']);
 
+// strtotime returns an int so these values are safe for sql queries.
 $startDatetime = strtotime($_POST['start-datetime']);
 $endDatetime = strtotime($_POST['end-datetime']);
 
@@ -40,8 +51,10 @@ if($startDatetime >= $endDatetime) {
     ]));
 }
 
+// All the values have safe and/or escaped user data.
 $query = 'SELECT id,station_id,date,' . join(',', $exportData) . ' FROM data WHERE (' . $stationsQuery . ') AND (date BETWEEN ' . $startDatetime . ' AND ' . $endDatetime . ') ORDER BY date DESC';
 if($maxRows > 0) {
+    // $maxRows is safe because it's an int!
     $query .= ' LIMIT ' . $maxRows;
 }
 
@@ -94,7 +107,7 @@ if(!$exportFile) {
     ]));
 }
 
-$result = database($query);
+$result = $database_connection->query($query);
 
 if($exportType === 'json') {
     fwrite($exportFile, '[');

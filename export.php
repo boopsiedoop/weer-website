@@ -250,7 +250,7 @@ die();
                     </thead>
                     <tbody>
                     <?php
-                    $result = database("SELECT * FROM stations WHERE (country='NORWAY' OR country='SWEDEN' OR country='DENMARK' OR country='ICELAND' OR country='FINLAND' OR country='FAROE ISLANDS')");
+                    $result = $database_connection->query("SELECT * FROM stations WHERE (country='NORWAY' OR country='SWEDEN' OR country='DENMARK' OR country='ICELAND' OR country='FINLAND' OR country='FAROE ISLANDS')");
                     foreach($result as $row) {
                         echo '<tr>';
 

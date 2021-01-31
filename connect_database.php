@@ -6,10 +6,3 @@ $database_connection = new mysqli(DATABASE['host'], DATABASE['username'], DATABA
 if($database_connection->connect_error) {
 	die("Connection failed: " . $database_connection->connect_error);
 }
-
-function database($query) {
-	global $database_connection;
-
-	$result = $database_connection->query($query);
-	return $result;
-}
