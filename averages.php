@@ -3,6 +3,7 @@ session_start();
 
 if ($_SESSION["loggedin"] != true) {
 header("location: login.php");
+die();
 }
 if(!isset($_GET['start-time']) || !isset($_GET['end-time'])) {
     $startTime = strtotime('-1 week');
@@ -49,7 +50,7 @@ include 'Connect_Database.php';
     </script>
     <div class="topnav">
       <div class="logo-image">
-            <img src= "DEOL-Partners-Logotype.png" class="img-fluid">
+            <img src= "img\DEOL-Partners-Logotype.png" class="img-fluid">
       </div>
       <a href="index.php">Homepage</a>
       <a href="export.php">Export</a>

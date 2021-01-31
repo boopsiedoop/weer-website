@@ -19,7 +19,7 @@ if(!empty($_GET['message'])) {
     <title>Login page</title>
     <div class="topnav">
       <div class="logo-image">
-            <img src= "DEOL-Partners-Logotype.png" class="img-fluid">
+            <img src= "img\DEOL-Partners-Logotype.png" class="img-fluid">
       </div>
       <a href="index.php">Homepage</a>
       <a href="averages.php">Averages</a>

@@ -4,6 +4,7 @@ session_start();
 
 if ($_SESSION["loggedin"] != true) {
 header("location: login.php");
+die();
 }
 ?>
 
@@ -135,7 +136,7 @@ header("location: login.php");
 <body>
   <div class="topnav">
     <div class="logo-image">
-          <img src= "DEOL-Partners-Logotype.png" class="img-fluid">
+          <img src= "img\DEOL-Partners-Logotype.png" class="img-fluid">
     </div>
     <a href="index.php">Homepage</a>
     <a href="averages.php">Averages</a>
@@ -145,7 +146,7 @@ header("location: login.php");
     <form id="export-form">
         <div class="row">
             <div class="col-sm-3">
-                <h3>Data points</h3>
+                <h3 class="toph3">Data points</h3>
 
                 <div class="form-check">
                     <input class="form-check-input" id="data-temperature" type="checkbox" checked>
@@ -229,7 +230,7 @@ header("location: login.php");
             </div>
 
             <div class="col-sm">
-                <h3>Station selection</h3>
+                <h3 class="toph3">Station selection</h3>
 
                 <div class="form-check">
                     <input class="form-check-input" id="select-all" type="checkbox">
