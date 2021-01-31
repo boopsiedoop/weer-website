@@ -1,2 +1,4 @@
 .idea/
+
 exports/
+database_config.php
