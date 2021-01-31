@@ -132,6 +132,7 @@ if($exportType === 'json') {
         fwrite($exportFile, join(',', array_values($row)) . "\n");
     }
 }else if($exportType == 'xml') {
+    fwrite($exportFile, "<?xml version=\"1.0\"?>\n");
     fwrite($exportFile, "<DATAPOINTS>\n");
 
     foreach($result as $row) {
