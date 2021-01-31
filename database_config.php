@@ -4,5 +4,5 @@ define('DATABASE', [
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'database' => 'stationsa',
+    'database' => 'stations',
 ]);
