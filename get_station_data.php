@@ -5,7 +5,7 @@ if ($_SESSION["loggedin"] != true) {
   die(json_encode([]));
 }
 
-include 'Connect_Database.php';
+include 'connect_database.php';
 $id = $_GET['id'];
 
 // Connectie maken met de database ....

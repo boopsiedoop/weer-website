@@ -9,7 +9,7 @@ if ($_SESSION["loggedin"] != true) {
 
 $benchmark_start = round(microtime(1) * 1000);
 
-include 'Connect_Database.php';
+include 'connect_database.php';
 
 $exportType = $_POST['export-type'];
 $exportData = explode(',', $_POST['export-data']);

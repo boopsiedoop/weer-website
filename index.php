@@ -1,5 +1,5 @@
 <?php
-include 'Connect_Database.php';
+include 'connect_database.php';
 session_start();
 
 if ($_SESSION["loggedin"] != true) {

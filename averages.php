@@ -21,7 +21,7 @@ else $startTime = strtotime($startTime);
 if(is_numeric($endTime)) $endTime = intval($endTime);
 else $endTime = strtotime($endTime);
 
-include 'Connect_Database.php';
+include 'connect_database.php';
 ?>
 
 <html>
