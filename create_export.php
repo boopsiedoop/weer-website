@@ -1,4 +1,11 @@
 <?php
+session_start();
+if ($_SESSION["loggedin"] != true) {
+    die(json_encode([
+        'error' => true,
+        'message' => 'You are not logged in!',
+    ]));
+}
 
 $benchmark_start = round(microtime(1) * 1000);
 

@@ -1,4 +1,10 @@
 <?php
+
+session_start();
+if ($_SESSION["loggedin"] != true) {
+  die(json_encode([]));
+}
+
 include 'Connect_Database.php';
 $id = $_GET['id'];
 
