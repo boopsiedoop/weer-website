@@ -126,16 +126,16 @@ ON averages.station_id = stations.stn";
             echo '<th>' . $row['name'] . '</th>';
             echo '<th>' . number_format($row['latitude'], 2) . ', ' . number_format($row['longitude'], 2) . '</th>';
             echo '<th>' . $row['elevation'] . '</th>';
-            echo '<th>' . number_format($temperature, 1) . '</th>';
-            echo '<th>' . number_format($dew_point, 1) . '</th>';
-            echo '<th>' . number_format($humidity, 1) . '</th>';
-            echo '<th>' . number_format($row['AVG(station_air_pressure)'], 1) . '</th>';
-            echo '<th>' . number_format($row['AVG(sea_air_pressure)'], 1) . '</th>';
-            echo '<th>' . number_format($row['AVG(visibility)'], 1) . '</th>';
-            echo '<th>' . number_format($row['AVG(wind_speed)'], 1) . '</th>';
-            echo '<th>' . number_format($row['AVG(precipitation)'], 1) . '</th>';
-            echo '<th>' . number_format($row['AVG(snow_height)'], 1) . '</th>';
-            echo '<th>' . number_format($row['AVG(overcast)'], 1) . '</th>';
+            echo '<th>' . number_format($temperature, 1, '.', '') . '</th>';
+            echo '<th>' . number_format($dew_point, 1, '.', '') . '</th>';
+            echo '<th>' . number_format($humidity, 1, '.', '') . '</th>';
+            echo '<th>' . number_format($row['AVG(station_air_pressure)'], 1, '.', '') . '</th>';
+            echo '<th>' . number_format($row['AVG(sea_air_pressure)'], 1, '.', '') . '</th>';
+            echo '<th>' . number_format($row['AVG(visibility)'], 1, '.', '') . '</th>';
+            echo '<th>' . number_format($row['AVG(wind_speed)'], 1, '.', '') . '</th>';
+            echo '<th>' . number_format($row['AVG(precipitation)'], 1, '.', '') . '</th>';
+            echo '<th>' . number_format($row['AVG(snow_height)'], 1, '.', '') . '</th>';
+            echo '<th>' . number_format($row['AVG(overcast)'], 1, '.', '') . '</th>';
 
             echo '</tr>';
         }
