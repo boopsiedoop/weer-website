@@ -141,7 +141,7 @@ header("location: login.php");
     <a href="averages.php">Averages</a>
     <a href="logout.php">Logout</a>
   </div>
-<div class="container" style="color: #B0B0B0;">
+<div class="container">
     <form id="export-form">
         <div class="row">
             <div class="col-sm-3">

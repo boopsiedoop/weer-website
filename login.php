@@ -30,10 +30,10 @@ if(!empty($_GET['message'])) {
   <body>
     <form action="checking.php" method="post">
       <div class="flex-container">
-        <label for="uname"><b>Username:</b></label>
+        <label class="inlog" for="uname"><b>Username:</b></label>
         <input type="text" placeholder="Enter Username" name="uname" required>
       <br>
-        <label for="psw"><b>Password:</b></label>
+        <label class="inlog" for="psw"><b>Password:</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
       <br>
         <button type="submit">Login</button>
