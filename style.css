@@ -17,7 +17,7 @@ margin-top: 100px;
 padding: 20px;
 
 }
-input[type=text], [type="password"] {
+input[type="text"], [type="password"] {
   padding: 15px;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -76,13 +76,14 @@ height: 35px;
   margin-left: 5%;
   padding: 10px;
   text-decoration: none;
-  font-size: 120%;
+  font-size: 130%;
 }
 
 
 .topnav a:hover {
-  background-color: #B0B0B0;
-  color: #262626;
+  background-color: #262626;
+  color: #B0B0B0;
+  opacity: 25%;
 }
 
 .bodytext{
@@ -146,9 +147,6 @@ height: 35px;
   background: #C864FF; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
-
-
-
 
 .sliderbox{
   position: relative;
@@ -218,14 +216,19 @@ height: 35px;
   background-color: #262626; /* Green */
   width: 100%;
   border: none;
-  color: white;
+  color: #B0B0B0;
   padding: 13px 30px;
   text-align: center;
-  font-family: monospace;
   outline:none;
-  font-size: 16px;
-  text-decoration-line: underline;
+  font-size: 17px;
 }
+
+input.button:hover {
+  background-color: #262626;
+  color: #B0B0B0;
+  opacity: 25%;
+}
+
 .test{
   position: relative;
   background-color: #262626;

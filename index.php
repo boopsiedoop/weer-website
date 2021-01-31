@@ -296,8 +296,8 @@ header("location: login.php");
         <input type="button" onclick="Snow()" class="button" value="Most snow fall">
       </div>
       <div class= "data1">
-        <p class = "headtext">Hihest temperature</p>
-        <input type="button" onclick="max_temp()" class="button" value="Hihest temperature">
+        <p class = "headtext">Highest temperature</p>
+        <input type="button" onclick="max_temp()" class="button" value="Highest temperature">
       </div>
       <div class= "data1">
         <p class = "headtext">Lowest temperature</p>
