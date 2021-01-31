@@ -79,18 +79,34 @@ die();
 
 
       function setup(){
-        canvas = createCanvas(getWidth()*0.745,getHeight()*0.90).parent('myContainer');
+        canvas = createCanvas(getWidth()*0.745,getHeight()*0.80).parent('myContainer');
         myMap = mappa.tileMap(options);
 
-//myMap.overlay(canvas);
-
         myMap.overlay(canvas);
+
+
       }
 
+
+
       function draw(){
-        var input = document.getElementById( 'datePicker' ).value;
-        console.log(input)
-        console.log(new Date())
+        if (recent == 0){
+          if (dataDate != Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value)*3600)){
+            dataDate  = Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value)*3600)
+            i_dataDate = dataDate
+            console.log(dataDate)
+
+          }
+        }
+        else{
+          if(i_dataDate == Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value)*3600)){
+            dataDate = Math.floor(new Date()/ 1000)
+          }
+          else{
+            recent = 0
+          }
+        }
+
         clear();
 
         for (var i = 0; i < JAVASCRIPT_DATA.length; i++) {
@@ -402,11 +418,16 @@ var day = date.getDate()
 if (day < 10){
   day = "0"+day
 }
+
 document.getElementById("date").innerHTML=(day+"-"+ month+"-"+date.getFullYear())
 
 document.getElementById("myRange").value = date.getHours();
 document.getElementById("datePicker").value = (date.getFullYear()+"-"+ month+"-"+day);
 document.getElementById("datePicker").max = (date.getFullYear()+"-"+ month+"-"+day);
+
+var dataDate = 0
+var recent = 1
+var i_dataDate = Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value)*3600)
 
 </script>
 </body>
