@@ -1,22 +1,15 @@
 <?php
-function database($query){ //function parameters, two variables.
+include_once 'database_config.php';
 
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "stations";
+// After the php script has finished executing, PHP will take care of closing the database connection for us!
+$database_connection = new mysqli(DATABASE['host'], DATABASE['username'], DATABASE['password'], DATABASE['database']);
+if($database_connection->connect_error) {
+	die("Connection failed: " . $database_connection->connect_error);
+}
 
-		// Create connection
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		// Check connection
-		if ($conn->connect_error) {
-		  die("Connection failed: " . $conn->connect_error);
-		}
+function database($query) {
+	global $database_connection;
 
-		$sql = $query;
-		$result = $conn->query($sql);
-		$conn->close();
-		return $result;
-	}
-
-?>
+	$result = $database_connection->query($query);
+	return $result;
+}
