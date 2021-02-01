@@ -91,16 +91,17 @@ die();
 
       function draw(){
         if (recent == 0){
-          if (dataDate != Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value)*3600)){
-            dataDate  = Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value)*3600)
+          if (dataDate != Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value-1)*3600)){
+            dataDate  = Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value-1)*3600)
             i_dataDate = dataDate
             console.log(dataDate)
 
           }
         }
         else{
-          if(i_dataDate == Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value)*3600)){
+          if(i_dataDate == Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value-1)*3600)){
             dataDate = Math.floor(new Date()/ 1000)
+            console.log("jkhvjuhcg")
           }
           else{
             recent = 0
@@ -142,63 +143,67 @@ die();
               document.getElementById("city").innerHTML=(entry.name)
               document.getElementById("height").innerHTML=(entry.elevation+"m")
               $.get({
-                url: "get_station_data.php?id="+entry.id,//"&date="+....+"&time="+.....+",
+                url: "get_station_data.php?id="+entry.id+"&date="+dataDate,
                 success:(data)=>{
+                  console.log(data)
                   data = JSON.parse(data)
+                  if(data.length != 0){
+                    document.getElementById("temp").innerHTML=(data[0].temperature+"°C")
+                    document.getElementById("wind").innerHTML=(data[0].wind_speed+"km/h")
+                    document.getElementById("visibility").innerHTML=(data[0].visibility+"km")
+                    document.getElementById("snow").innerHTML=(data[0].snow_height+"cm")
+                    document.getElementById("overcast").innerHTML=(data[0].overcast+"%")
+                    document.getElementById('humidity').innerHTML=(((data[0].dew_point*5)-(data[0].temperature*5))+100+"%")
+                    document.getElementById("dew_point").innerHTML=(data[0].dew_point+"°C")
 
-                  document.getElementById("temp").innerHTML=(data[0].temperature+"°C")
-                  document.getElementById("wind").innerHTML=(data[0].wind_speed+"km/h")
-                  document.getElementById("visibility").innerHTML=(data[0].visibility+"km")
-                  document.getElementById("snow").innerHTML=(data[0].snow_height+"cm")
-                  document.getElementById("overcast").innerHTML=(data[0].overcast+"%")
-                  document.getElementById('humidity').innerHTML=(((data[0].dew_point*5)-(data[0].temperature*5))+100+"%")
-                  document.getElementById("dew_point").innerHTML=(data[0].dew_point+"°C")
-
-                  var date = new Date(data[0].date * 1000)
-                  var hour = date.getHours()
-                  if (hour < 10){
-                    hour = "0"+hour
-                  }
-                  var minutes = date.getMinutes()
-                  if (minutes < 10){
-                    minutes = "0"+minutes
-                  }
-                  document.getElementById("time").innerHTML=(hour+":"+minutes)
-                  var month = date.getMonth() + 1
-                  if (month < 10){
-                    month = "0"+month
-                  }
-                  var day = date.getDate()
-                  if (day < 10){
-                    day = "0"+day
-                  }
-                  document.getElementById("date").innerHTML=(day+"-"+ month+"-"+date.getFullYear())
-
-                  document.getElementById('arrow').style = 'transform: rotateZ(-'+data[0].wind_direction+'deg);'
-
-                  if (data[0].has_whirlwinded == 1) {
-                    document.getElementById('wheather').src='img/tornado.png'
+                    var date = new Date(data[0].date * 1000)
+                    var hour = date.getHours()
+                    if (hour < 10){
+                      hour = "0"+hour
                     }
-                  else if (data[0].has_hailed == 1) {
-                    document.getElementById('wheather').src='img/hail.png'
-                  }
-                  else if (data[0].has_snowed == 1) {
-                    document.getElementById('wheather').src='img/snow.png'
-                  }
-                  else if (data[0].has_tundered == 1) {
-                    document.getElementById('wheather').src='img/thunder.png'
-                  }
-                  else if (data[0].has_rained == 1) {
-                    document.getElementById('wheather').src='img/rain.png'
-                  }
-                  else if (data[0].overcast > 50) {
-                    document.getElementById('wheather').src='img/clouds.png'
-                  }
-                  else {
-                    document.getElementById('wheather').src='img/sun.png'
-                  }
+                    var minutes = date.getMinutes()
+                    if (minutes < 10){
+                      minutes = "0"+minutes
+                    }
+                    document.getElementById("time").innerHTML=(hour+":"+minutes)
+                    var month = date.getMonth() + 1
+                    if (month < 10){
+                      month = "0"+month
+                    }
+                    var day = date.getDate()
+                    if (day < 10){
+                      day = "0"+day
+                    }
+                    document.getElementById("date").innerHTML=(day+"-"+ month+"-"+date.getFullYear())
 
-                }})
+                    document.getElementById('arrow').style = 'transform: rotateZ(-'+data[0].wind_direction+'deg);'
+
+                    if (data[0].has_whirlwinded == 1) {
+                      document.getElementById('wheather').src='img/tornado.png'
+                      }
+                    else if (data[0].has_hailed == 1) {
+                      document.getElementById('wheather').src='img/hail.png'
+                    }
+                    else if (data[0].has_snowed == 1) {
+                      document.getElementById('wheather').src='img/snow.png'
+                    }
+                    else if (data[0].has_tundered == 1) {
+                      document.getElementById('wheather').src='img/thunder.png'
+                    }
+                    else if (data[0].has_rained == 1) {
+                      document.getElementById('wheather').src='img/rain.png'
+                    }
+                    else if (data[0].overcast > 50) {
+                      document.getElementById('wheather').src='img/clouds.png'
+                    }
+                    else {
+                      document.getElementById('wheather').src='img/sun.png'
+                    }
+
+                }
+                else{
+                  console.log("u fucked")
+                }}})
             }
             myMap.map.flyTo([JAVASCRIPT_DATA[i].lat, JAVASCRIPT_DATA[i].lon]);
             break;
@@ -217,7 +222,7 @@ die();
             document.getElementById("city").innerHTML=(entry.name)
             document.getElementById("height").innerHTML=(entry.elevation+"m")
             $.get({
-              url: "get_station_data.php?id="+entry.id,//"&date="+....+"&time="+.....+",
+              url: "get_station_data.php?id="+entry.id+"&date="+dataDate,
               success:(data)=>{
                 data = JSON.parse(data)
 
@@ -293,7 +298,8 @@ die();
       }
 
       function start_data(){
-        date = 1
+        recent = 1
+        renew(SELECT_DATA.id)
       }
 
     </script>
