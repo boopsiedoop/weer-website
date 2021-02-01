@@ -55,7 +55,7 @@ include 'connect_database.php';
       </div>
       <a href="index.php">Homepage</a>
       <a href="export.php">Export</a>
-      <a href="logout.php">Logout</a>
+      <a href="logout.php" style="float: right; padding-right: 60px">Logout</a>
 
     </div>
 </head>

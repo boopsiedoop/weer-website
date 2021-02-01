@@ -140,7 +140,7 @@ die();
     </div>
     <a href="index.php">Homepage</a>
     <a href="averages.php">Averages</a>
-    <a href="logout.php">Logout</a>
+    <a href="logout.php" style="float: right; padding-right: 60px">Logout</a>
   </div>
 <div class="container">
     <form id="export-form">

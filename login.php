@@ -17,15 +17,9 @@ if(!empty($_GET['message'])) {
     <link rel="stylesheet" href="style.css">
     <meta charset="utf-8">
     <title>Login page</title>
-    <div class="topnav">
-      <div class="logo-image">
-            <img src= "img\DEOL-Partners-Logotype.png" class="img-fluid">
-      </div>
-      <a href="index.php">Homepage</a>
-      <a href="averages.php">Averages</a>
-      <a href="export.php">Export</a>
-    </div>
-    <h1> DEOL partners login</h1>
+    <img src= "img\DEOL-Partners-Logotype.png"  class="center" style="width:400px;height:75px;">
+
+
   </head>
   <body>
     <form action="checking.php" method="post">

@@ -44,7 +44,7 @@ die();
   </div>
   <a href="averages.php">Averages</a>
   <a href="export.php">Export</a>
-  <a href="logout.php">Logout</a>
+  <a href="logout.php" style="float: right; padding-right: 60px">Logout</a>
 </div>
 
 <body>
@@ -71,9 +71,9 @@ die();
 
 
       const options = {
-        lat: 64.906423,
-        lng: -18.506711,
-        zoom: 6,
+        lat: 62.960000,
+        lng: 0.545799,
+        zoom: 5,
         style: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       }
 
@@ -148,9 +148,8 @@ die();
               document.getElementById("city").innerHTML=(entry.name)
               document.getElementById("height").innerHTML=(entry.elevation+"m")
               $.get({
-                url: "get_station_data.php?id="+entry.id+"&date="+dataDate,
+                url: "get_station_data.php?id="+entry.id+"&date="+dataDate+"&type="+ 0,
                 success:(data)=>{
-                  console.log(data)
                   data = JSON.parse(data)
                   if(data.length != 0){
                     document.getElementById("temp").innerHTML=(data[0].temperature+"°C")
@@ -229,7 +228,7 @@ die();
             document.getElementById("city").innerHTML=(entry.name)
             document.getElementById("height").innerHTML=(entry.elevation+"m")
             $.get({
-              url: "get_station_data.php?id="+entry.id+"&date="+dataDate,
+              url: "get_station_data.php?id="+entry.id+"&date="+dataDate+"&type="+ 0,
               success:(data)=>{
                 data = JSON.parse(data)
 
@@ -295,15 +294,34 @@ die();
       }
 
       function Snow(){
-        renew(21150)
+        $.get({
+          url: "get_station_data.php?id="+11+"&date="+dataDate+"&type="+ 1,
+          success:(data)=>{
+            data = JSON.parse(data)
+            if(data.length != 0){
+              renew(data[0].station_id)
+            }}})
       }
 
       function min_temp(){
-        renew(22300)
+        $.get({
+          url: "get_station_data.php?id="+11+"&date="+dataDate+"&type="+ 3,
+          success:(data)=>{
+            data = JSON.parse(data)
+            if(data.length != 0){
+              renew(data[0].station_id)
+            }}})
       }
 
       function max_temp(){
-        renew(26380)
+        $.get({
+          url: "get_station_data.php?id="+11+"&date="+dataDate+"&type="+ 2,
+          success:(data)=>{
+            data = JSON.parse(data)
+            if(data.length != 0){
+              renew(data[0].station_id)
+            }}})
+
       }
 
       function start_data(){
@@ -338,18 +356,14 @@ die();
         <p class = "headtext">Most recent data</p>
         <input type="button" onclick="start_data()" class="button" value="Recent data">
       </div>
-      <div class= "data1">
-        <p class = "headtext">-----</p>
-        <p class = "bodytext">-----</p>
+      <div class= "data2">
+        <p class = "headtext">Station Name</p>
+        <p class = "bodytext" id="city">-----</p>
       </div>
 
 
 
       <div class= "box1">
-        <div class= "sliderbox">
-          <p class = "headtext">Station Name</p>
-          <p class = "bodytext" id="city">-----</p>
-        </div>
         <div class= "data3">
           <p class = "headtext">Station ID</p>
           <p class = "bodytext" id="id">-----</p>
