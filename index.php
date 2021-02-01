@@ -94,14 +94,19 @@ die();
           if (dataDate != Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value-1)*3600)){
             dataDate  = Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value-1)*3600)
             i_dataDate = dataDate
-            console.log(dataDate)
+            renew(SELECT_DATA[0].id)
+            console.log(SELECT_DATA[0].id)
 
           }
         }
         else{
-          if(i_dataDate == Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value-1)*3600)){
-            dataDate = Math.floor(new Date()/ 1000)
-            console.log("jkhvjuhcg")
+          if(i_dataDate == Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value-1)*3600) ){
+            if(recent == 2){
+              dataDate = Math.floor(new Date()/ 1000)
+              console.log("jkhvjuhcg")
+              renew(SELECT_DATA[0].id)
+              recent = 1
+            }
           }
           else{
             recent = 0
@@ -155,6 +160,8 @@ die();
                     document.getElementById("overcast").innerHTML=(data[0].overcast+"%")
                     document.getElementById('humidity').innerHTML=(((data[0].dew_point*5)-(data[0].temperature*5))+100+"%")
                     document.getElementById("dew_point").innerHTML=(data[0].dew_point+"°C")
+                    document.getElementById("station_pressure").innerHTML=(data[0].station_air_pressure+" mbar")
+                    document.getElementById("sea_pressure").innerHTML=(data[0].sea_air_pressure+" mbar")
 
                     var date = new Date(data[0].date * 1000)
                     var hour = date.getHours()
@@ -233,6 +240,8 @@ die();
                 document.getElementById("overcast").innerHTML=(data[0].overcast+"%")
                 document.getElementById('humidity').innerHTML=(((data[0].dew_point*5)-(data[0].temperature*5))+100+"%")
                 document.getElementById("dew_point").innerHTML=(data[0].dew_point+"°C")
+                document.getElementById("station_pressure").innerHTML=(data[0].station_air_pressure+" mbar")
+                document.getElementById("sea_pressure").innerHTML=(data[0].sea_air_pressure+" mbar")
 
                 var date = new Date(data[0].date * 1000)
                 var hour = date.getHours()
@@ -298,8 +307,7 @@ die();
       }
 
       function start_data(){
-        recent = 1
-        renew(SELECT_DATA.id)
+        recent = 2
       }
 
     </script>
@@ -340,53 +348,53 @@ die();
       <div class= "box1">
         <div class= "sliderbox">
           <p class = "headtext">Station Name</p>
-          <p class = "bodytext" id="city">kjQhv</p>
+          <p class = "bodytext" id="city">-----</p>
         </div>
         <div class= "data3">
           <p class = "headtext">Station ID</p>
-          <p class = "bodytext" id="id">19283</p>
+          <p class = "bodytext" id="id">-----</p>
         </div>
         <div class= "data4">
           <p class = "headtext">Altitude</p>
-          <p class = "bodytext" id="height">200m</p>
+          <p class = "bodytext" id="height">-----</p>
         </div>
         <div class= "data3">
           <p class = "headtext">Humidity</p>
-          <p class = "bodytext" id="humidity">43.5%</p>
+          <p class = "bodytext" id="humidity">-----</p>
         </div>
         <div class= "data4">
           <p class = "headtext">Temperature</p>
-          <p class = "bodytext" id="temp">20.5°C</p>
+          <p class = "bodytext" id="temp">-----</p>
         </div>
         <div class= "data3">
           <p class = "headtext">Dew point</p>
-          <p class = "bodytext" id="dew_point">-4°C</p>
+          <p class = "bodytext" id="dew_point">-----</p>
         </div>
         <div class= "data4">
           <p class = "headtext">Overcast</p>
-          <p class = "bodytext" id="overcast">200m</p>
+          <p class = "bodytext" id="overcast">-----</p>
         </div>
         <div class= "data3">
-          <p class = "headtext">-----</p>
-          <p class = "bodytext">=====</p>
+          <p class = "headtext">Station air pressure</p>
+          <p class = "bodytext" id = "station_pressure">----</p>
         </div>
         <div class= "data4">
-          <p class = "headtext">-----</p>
-          <p class = "bodytext">-----</p>
+          <p class = "headtext">Sea air pressure</p>
+          <p class = "bodytext" id = "sea_pressure">-----</p>
         </div>
         <div class= "data3">
           <p class = "headtext">Snow height</p>
-          <p class = "bodytext" id="snow">20.5°C</p>
+          <p class = "bodytext" id="snow">-----</p>
         </div>
         <div class= "data4">
           <p class = "headtext">Visibility</p>
-          <p class = "bodytext" id="visibility">kjQhv</p>
+          <p class = "bodytext" id="visibility">-----</p>
         </div>
         <div class= "dataimages">
           <div class="dataImg">
             <p class = "headtext">Wind direction</p>
             <img id = "arrow" src="img/arrow.png", height="100px">
-            <p class = "bodytext" id="wind">19283</p>
+            <p class = "bodytext" id="wind">-----</p>
           </div>
           <div class="dataImg">
             <p class = "headtext">Wheather</p>
@@ -431,8 +439,8 @@ document.getElementById("myRange").value = date.getHours();
 document.getElementById("datePicker").value = (date.getFullYear()+"-"+ month+"-"+day);
 document.getElementById("datePicker").max = (date.getFullYear()+"-"+ month+"-"+day);
 
-var dataDate = 0
-var recent = 1
+var dataDate = new Date()
+var recent = 0
 var i_dataDate = Math.floor(new Date(document.getElementById( 'datePicker' ).value)/ 1000 ) + ((document.getElementById( 'myRange' ).value)*3600)
 
 </script>
