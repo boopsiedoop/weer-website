@@ -6,7 +6,7 @@ header("location: login.php");
 die();
 }
 if(!isset($_GET['start-time']) || !isset($_GET['end-time'])) {
-    $startTime = strtotime('-1 week');
+    $startTime = strtotime('-1 month');
     $endTime = strtotime('today');
     header("Location: ?start-time=$startTime&end-time=$endTime");
     die();
