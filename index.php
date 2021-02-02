@@ -182,7 +182,7 @@ die();
                     }
                     document.getElementById("date").innerHTML=(day+"-"+ month+"-"+date.getFullYear())
 
-                    document.getElementById('arrow').style = 'transform: rotateZ(-'+data[0].wind_direction+'deg);'
+                    document.getElementById('arrow').style = 'transform: rotateZ('+data[0].wind_direction+'deg);'
 
                     if (data[0].has_whirlwinded == 1) {
                       document.getElementById('wheather').src='img/tornado.png'
@@ -262,7 +262,7 @@ die();
                 }
                 document.getElementById("date").innerHTML=(day+"-"+ month+"-"+date.getFullYear())
 
-                document.getElementById('arrow').style = 'transform: rotateZ(-'+data[0].wind_direction+'deg);'
+                document.getElementById('arrow').style = 'transform: rotateZ('+data[0].wind_direction+'deg);'
 
                 if (data[0].has_whirlwinded == 1) {
                   document.getElementById('wheather').src='img/tornado.png'
