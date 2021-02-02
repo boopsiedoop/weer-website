@@ -14,37 +14,24 @@ $type = $database_connection->real_escape_string($_GET['type']);
 if($type == 0){
   $result = $database_connection->query("SELECT * FROM data WHERE station_id =".$id." ORDER BY ABS(date - ".$date.") ASC LIMIT 1");
 }else{
+  $startDate = new DateTime();
+  $startDate->setTimestamp($date);
+  $startDate->setTime(0, 0, 0, 0);
+
+  $endDate = new DateTime();
+  $endDate->setTimestamp($date);
+  $endDate->setTime(0, 0, 0, 0);
+  $endDate->modify('+1 day');
+
   $query = "
     SELECT *
     FROM data
     WHERE station_id IN (
-        SELECT stn
-        FROM stations
-        WHERE (country='NORWAY' OR country='SWEDEN' OR country='DENMARK' OR country='ICELAND' OR country='FINLAND' OR country='FAROE ISLANDS')
+      SELECT stn
+      FROM stations
+      WHERE (country='NORWAY' OR country='SWEDEN' OR country='DENMARK' OR country='ICELAND' OR country='FINLAND' OR country='FAROE ISLANDS')
     )
-    AND date BETWEEN (
-        SELECT date
-        FROM data
-        WHERE station_id IN (
-            SELECT stn
-            FROM stations
-            WHERE (country='NORWAY' OR country='SWEDEN' OR country='DENMARK' OR country='ICELAND' OR country='FINLAND' OR country='FAROE ISLANDS')
-        )
-        ORDER BY ABS(date - $date) ASC
-        LIMIT 1
-    ) AND (
-        (
-            SELECT date
-            FROM data
-            WHERE station_id IN (
-                SELECT stn
-                FROM stations
-                WHERE (country='NORWAY' OR country='SWEDEN' OR country='DENMARK' OR country='ICELAND' OR country='FINLAND' OR country='FAROE ISLANDS')
-            )
-            ORDER BY ABS(date - $date) ASC
-            LIMIT 1
-        ) + 50
-    )";
+    AND date BETWEEN " . $startDate->getTimestamp() . " AND " . $endDate->getTimestamp();
 
   if($type == 1){
     $query = "$query ORDER BY snow_height DESC LIMIT 1";
